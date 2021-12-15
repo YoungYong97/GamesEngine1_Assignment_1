@@ -8,11 +8,13 @@ public class spawn : MonoBehaviour
     public static GameObject[] prefabLine = new GameObject[MusicVis.numBand];
     public float prefabScale = 5;
     public bool useBuffer;
+    Material material;
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnLine();
+
     }
 
     // Update is called once per frame
@@ -23,13 +25,14 @@ public class spawn : MonoBehaviour
 
     void SpawnLine()
     {
+        float half = (float)((MusicVis.numBand / 2) + 0.5f);
         for (int i = 0; i < MusicVis.numBand; i++)
         {
             GameObject line = (GameObject)Instantiate(prefab);
 
             line.transform.position = this.transform.position;
             line.transform.parent = this.transform;
-            line.transform.position = Vector3.right * i * 1.1f;
+            line.transform.position = transform.TransformPoint(new Vector3(-half + i * 1.2f, 0, 0));
             prefabLine[i] = line;
         }
     }

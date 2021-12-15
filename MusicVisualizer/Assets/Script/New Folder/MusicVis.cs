@@ -8,10 +8,14 @@ public class MusicVis : MonoBehaviour
     AudioSource audioSource;
     public static int numSpectrum = 512;
     public static int numBand = 8;
-    public static float[] spectrum = new float[numSpectrum];    
+    public static float[] spectrum = new float[numSpectrum];
     public static float[] freqBand = new float[numBand];
     public static float[] bandBuffer = new float[numBand];
-    float[] bufferDecrease = new float[numBand];
+    public static float[] bufferDecrease = new float[numBand];
+
+    float[] freqBandHigh = new float[numBand];
+    public static float[] audioBand = new float[numBand];
+    public static float[] audioBandBuffer = new float[numBand];
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +29,25 @@ public class MusicVis : MonoBehaviour
         GetSpectrum();
         GetFreqBands();
         BandBuffer();
+        CreateAudioBand();
     }
 
     void GetSpectrum()
     {
         audioSource.GetSpectrumData(spectrum, 0, FFTWindow.Blackman);
+    }
+
+    void CreateAudioBand()
+    {
+        for (int i = 0; i < numBand; i++)
+        {
+            if (freqBand[i] > freqBandHigh[i])
+            {
+                freqBandHigh[i] = freqBand[i];
+            }
+            audioBand[i] = (freqBand[i] / freqBandHigh[i]);
+            audioBandBuffer[i] = (bandBuffer[i] / freqBandHigh[i]);
+        }
     }
 
     void GetFreqBands()
@@ -74,4 +92,5 @@ public class MusicVis : MonoBehaviour
             }
         }
     }
+
 }

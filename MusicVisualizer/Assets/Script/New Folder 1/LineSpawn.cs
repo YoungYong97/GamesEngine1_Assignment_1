@@ -9,8 +9,8 @@ public class LineSpawn : MonoBehaviour
 
     public float visualModifier = 50.0f;
     public float smoothSpeed = 5.0f;
-    public float maxVisualScale = 5.0f;
-    public float keepPercentage = 0.5f;
+    public float maxVisualScale = 4.0f;
+    public float keepPercentage = 0.4f;
 
     private float[] lineVisualScale;
     private Transform[] lineVisualList;
@@ -37,7 +37,7 @@ public class LineSpawn : MonoBehaviour
 
         for (int i = 0; i < lineVisual; i++)
         {
-            Vector3 pos = (center + new Vector3(-half + i, -2, 0));
+            Vector3 pos = (center + new Vector3(-half + i * 1.1f, -2, 0));
             GameObject go = GameObject.Instantiate<GameObject>(prefab);
             go.transform.position = pos;
             //go.GetComponent<Renderer>().material.color = Color.HSVToRGB(Random.Range(0.0f, 1.0f), 1, 1);

@@ -9,7 +9,7 @@ public class CircleSpawn : MonoBehaviour
 
     public float visualModifier = 50.0f;
     public float smoothSpeed = 5.0f;
-    public float maxVisualScale = 5.0f;
+    public float maxVisualScale = 4.0f;
     public float keepPercentage = 0.5f;
 
     public float backgroundIntensity;
