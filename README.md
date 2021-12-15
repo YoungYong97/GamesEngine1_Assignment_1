@@ -5,6 +5,7 @@
 
 ## Description of Assignment
 This Unity Application takes in an audio file(music) and then visualizes the audio. This application is made up of a ring of 32 cubes and a line of eight cubes. I modified the cubes so that the cubes only scale in one direction and on both ways.
+
 ![image](https://user-images.githubusercontent.com/22171305/146187241-5138568e-62e8-4b40-a744-609872d5be22.png)
 
 ![image](https://user-images.githubusercontent.com/22171305/146187463-6526b8d2-caa2-4513-b7d2-2aae28fe4d87.png)
