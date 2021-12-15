@@ -6,13 +6,12 @@ using UnityEngine;
 public class MusicVis : MonoBehaviour
 {
     AudioSource audioSource;
-    public static int numSpectrum = 8192;
-    public static float[] spectrum = new float[numSpectrum];
-    public static int numBandLine = 8;
-    public static int numBandCir = 32;
-    public static float[] freqBandLine = new float[numBandLine];
-    public static float[] freqBandCir = new float[numBandCir];
-    public float smoothSpeed = 10;
+    public static int numSpectrum = 512;
+    public static int numBand = 8;
+    public static float[] spectrum = new float[numSpectrum];    
+    public static float[] freqBand = new float[numBand];
+    public static float[] bandBuffer = new float[numBand];
+    float[] bufferDecrease = new float[numBand];
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +24,7 @@ public class MusicVis : MonoBehaviour
     {
         GetSpectrum();
         GetFreqBands();
+        BandBuffer();
     }
 
     void GetSpectrum()
@@ -34,54 +34,44 @@ public class MusicVis : MonoBehaviour
 
     void GetFreqBands()
     {
-        int lineCount = 0;
-        int cirCount = 0;
+        int count = 0;
 
-        for (int i = 0; i < numBandLine; i++)
+        for (int i = 0; i < numBand; i++)
         {
             float average = 0;
-            int lineSpectrumCount = (int)Mathf.Pow(2, i) * 2;
+            int spectrumCount = (int)Mathf.Pow(2, i) * 2;
 
-            if(i == (numBandLine - 1))
+            if(i == (numBand - 1))
             {
-                lineSpectrumCount += 2;         
+                spectrumCount += 2;         
             }
 
-            for (int j = 0; j < lineSpectrumCount; j++)
+            for (int j = 0; j < spectrumCount; j++)
             {
-                average += spectrum[lineCount] * (lineCount);
-                lineCount++;
+                average += spectrum[count] * (count + 1);
+                count++;
             }
-            average /= lineCount;
+            average /= count;
 
-            freqBandLine[i] = average;
-        }
-
-
-        int cirSpectrumCount = 0;
-        for (int i = 0; i < numBandCir; i++)
-        {
-            float average = 0;
-            cirSpectrumCount = cirSpectrumCount + i;
-
-            if (i == (numBandCir - 1))
-            {
-                cirSpectrumCount -= 16;
-            }
-
-            for (int j = 0; j < cirSpectrumCount; j++)
-            {
-                average += spectrum[cirCount] * (cirCount * 1);
-                cirCount++;
-            }
-            average /= cirCount;
-
-            freqBandCir[i] = average;
-        }
+            freqBand[i] = average;
+        }        
     }
 
-    void SmoothBand()
+    void BandBuffer()
     {
+        for (int i = 0; i < numBand; i++)
+        {
+            if(freqBand[i] > bandBuffer[i])
+            {
+                bandBuffer[i] = freqBand[i];
+                bufferDecrease[i] = 0.00005f;
+            }
 
+            if (freqBand[i] < bandBuffer[i])
+            {
+                bandBuffer[i] -= bufferDecrease[i];
+                bufferDecrease[i] *= 1.1f;
+            }
+        }
     }
 }
