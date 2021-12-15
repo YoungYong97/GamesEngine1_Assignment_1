@@ -15,6 +15,9 @@ Import the audio file that you wish to play as an asset, then drag the audio fil
 
 ![image](https://user-images.githubusercontent.com/22171305/146189109-7c2cee35-cf17-4ee0-ada3-2c93ae6bb9c4.png)
 
+## How it works
+
+
 
 ## Proposal
 For my Games Engine project I would like to create a 3D music visualizer. The music visualizer would be something similar to the pictures below where the shapes change according to the music, But the one that I want to create would be in 3D.
