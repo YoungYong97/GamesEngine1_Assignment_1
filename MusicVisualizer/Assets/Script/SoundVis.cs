@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundVis : MonoBehaviour
 {
+    //declaring variables
     public static int spectrumSize = 128;
 
     public float rmsValue;
@@ -13,32 +14,31 @@ public class SoundVis : MonoBehaviour
     public float speed = 10;
 
     private AudioSource source;
-    private float[] samples;
-    public static float[] spectrum;
-    private float sampleRate;
+    private float[] samples = new float[spectrumSize];
+    public static float[] spectrum = new float[spectrumSize];
 
     // Start is called before the first frame update
     void Start()
     {
+        //getting the type of game object and assigning to source
         source = GetComponent<AudioSource>();
-        samples = new float[spectrumSize];
-        spectrum = new float[spectrumSize];
-        sampleRate = AudioSettings.outputSampleRate;
     }    
 
     // Update is called once per frame
     void Update()
     {
+        //calling the AnalyzeSound Function per frame
         AnalyzeSound();
-
+        //rotating the object this script is attached to
         transform.Rotate(0, 0, speed * Time.deltaTime);
     }
 
     void AnalyzeSound()
     {
+        //getting the output data of the currently playing audio
         source.GetOutputData(samples, 0);
 
-        //Get RMS 
+        //calculating the RMS 
         int i = 0;
         float sum = 0;
         for (i = 0; i < spectrumSize; i++)
@@ -47,10 +47,10 @@ public class SoundVis : MonoBehaviour
         }
         rmsValue = Mathf.Sqrt(sum / spectrumSize);
 
-        //Get the DB value
+        //from the rms value calculate the DB value
         dbValue = 20 * Mathf.Log10(rmsValue / 0.1f);
 
-        //Get sound spectrum
+        //Getting the sound spectrum
         source.GetSpectrumData(spectrum, 0, FFTWindow.BlackmanHarris);
 
     }

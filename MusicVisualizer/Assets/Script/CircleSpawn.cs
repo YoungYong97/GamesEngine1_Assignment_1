@@ -21,6 +21,8 @@ public class CircleSpawn : MonoBehaviour
     private float[] cirVisualScale;
     private Transform[] cirVisualList;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
