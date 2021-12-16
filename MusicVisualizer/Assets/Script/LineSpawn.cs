@@ -12,8 +12,7 @@ public class LineSpawn : MonoBehaviour
     public float visualModifier = 50.0f;
     public float smoothSpeed = 5.0f;
     public float maxVisualScale = 4.0f;
-    //percentage of the spectrum to display
-    public float keepPercentage = 0.4f;
+    public float keepPercentage = 0.2f;
 
     private float[] lineVisualScale;
     private Transform[] lineVisualList;
@@ -33,6 +32,7 @@ public class LineSpawn : MonoBehaviour
 
     void SpawnLine()
     {
+        lineVisualScale = new float[lineVisual];
         //calculating the half way point of the visuals been spawned
         float half = (lineVisual / 2) - 0.5f;
         //initialising the variable as a transform array
@@ -58,17 +58,18 @@ public class LineSpawn : MonoBehaviour
 
     void UpdateLineVisual()
     {
-        //decalring variable
-        lineVisualScale = new float[lineVisual];
+        //decalring variable       
         int lineVisualIndex = 0;
         int lineSpectrumIndex = 0;
 
+        //getting the average size of spectrum that each visual holds
         int lineAverageSize = (int)((SoundVis.spectrumSize / lineVisual) * keepPercentage);
 
         while (lineVisualIndex < lineVisual)
         {
             int j = 0;
             float sum = 0;
+            //calculating the scale of the visual
             while (j < lineAverageSize)
             {
                 sum += SoundVis.spectrum[lineSpectrumIndex];
@@ -77,13 +78,15 @@ public class LineSpawn : MonoBehaviour
             }
 
             float scaleY = sum / lineAverageSize * visualModifier;
+            //decreasing the scale of the visual 
             lineVisualScale[lineVisualIndex] -= Time.deltaTime * smoothSpeed;
+            //set the scale to the new calculated scale if scale is lower
             if (lineVisualScale[lineVisualIndex] < scaleY)
                 lineVisualScale[lineVisualIndex] = scaleY;
-
+            //set the scale to the max scale if the scale is higher than the max scale
             if (lineVisualScale[lineVisualIndex] > maxVisualScale)
                 lineVisualScale[lineVisualIndex] = maxVisualScale;
-
+            //change the scale of the visual
             lineVisualList[lineVisualIndex].localScale = Vector3.one + Vector3.up * lineVisualScale[lineVisualIndex];
             lineVisualIndex++;
         }

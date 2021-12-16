@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 124366308}
   - component: {fileID: 124366309}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1079,7 +1079,7 @@ GameObject:
   - component: {fileID: 1514311439}
   - component: {fileID: 1514311438}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

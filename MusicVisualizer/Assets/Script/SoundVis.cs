@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundVis : MonoBehaviour
 {
     //declaring variables
-    public static int spectrumSize = 128;
+    public static int spectrumSize = 256;
 
     public float rmsValue;
     public static float dbValue;
