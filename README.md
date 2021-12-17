@@ -16,8 +16,21 @@ Import the audio file that you wish to play as an asset, then drag the audio fil
 ![image](https://user-images.githubusercontent.com/22171305/146189109-7c2cee35-cf17-4ee0-ada3-2c93ae6bb9c4.png)
 
 ## How it works
+I get the spectrum value of the audio file every frame and use the spectrum value of the audio at that frame. Using this value I can then make changes to the scale of the object that I spawn.
+
+![image](https://user-images.githubusercontent.com/22171305/146469569-6f2ce1d3-5217-4b95-b40f-2061b81233b8.png)
+
+I also calculate the DB value of the audio, using this value I make changes to the color of the background.
+
+![image](https://user-images.githubusercontent.com/22171305/146470258-0fcda892-10f7-4039-94b8-01e4591355c3.png)
+
+The scale of each object spawned is changed every frame, this is done by using the spectrum value obtained from the analysis.
+
+![image](https://user-images.githubusercontent.com/22171305/146469628-6db0d0f5-9534-405b-98a1-3f90e4e99ebf.png)
 
 
+## References
+https://www.youtube.com/watch?v=wtXirrO-iNA&t=122s
 
 ## Proposal
 For my Games Engine project I would like to create a 3D music visualizer. The music visualizer would be something similar to the pictures below where the shapes change according to the music, But the one that I want to create would be in 3D.
